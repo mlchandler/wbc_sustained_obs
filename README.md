@@ -6,7 +6,7 @@
  
 `ix21_velocity.nc`, `px30_velocity.nc`, and `px40_velocity.nc` are the velocity cross-section data files output from the above scripts. These files will be made available on the Scripps Institution of Oceanography eScholarship site. In the meantime preliminary versions of the files can be found [in this Google Drive](https://drive.google.com/drive/folders/1UTvaPosz9Z--lX1g_9b-1OqlUm6AsMKI?usp=sharing).
 
-`Fig1.m`, `Fig1_panels.m`, `Fig2.m`, `Fig3.m`, `Fig4.m`, and `Fig5.m` are the scripts used to produce the respective figures in the submitted manuscript.
+`Fig1.m`, `Fig1_panels.m`, `Fig2.m`, `Fig3.m`, `Fig4.m`, and `Fig5.m` are the scripts used to produce the figures in the submitted manuscript.
 
 The `additional_functions` folder includes my functions I have used in the above scripts. In particular the function `XAA_processing.m` contains the bulk of methods (correcting for individual transect path differences, extending observations in depth, and producing regular monthly time series). Other functions I have used include those from [TEOS-10](http://www.teos-10.org/) and [MATLAB File Exchange](https://www.mathworks.com/matlabcentral/fileexchange/) - please contact me for specifics.
 
