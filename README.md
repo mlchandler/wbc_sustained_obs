@@ -1,7 +1,5 @@
 # wbc_sustained_obs
 
-> *Please note the repository is still being populated at this time*
- 
 **Relevant code for Chandler et al. [in prep]. Western boundary current variability from sustained ocean observations.**
  
 `XAA_ix21.m`, `XAA_px30.m`, and `XAA_px40.m` are the scripts to produce the velocity cross-sections for HR-XBT transects [IX21](http://www-hrx.ucsd.edu/ix15.html), [PX30](http://www-hrx.ucsd.edu/px31.html), and [PX40](http://www-hrx.ucsd.edu/px40.html).
