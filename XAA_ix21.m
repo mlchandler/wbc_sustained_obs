@@ -1,5 +1,5 @@
 % Mitchell Chandler, SIO
-% Last updated: 15/11/2021
+% Last updated: 18/11/2021
 
 %% Load files
 load cmap_Zilberman %velocity colourmap
@@ -1317,7 +1317,7 @@ ann_cyc_sig{'Offshore','R2'} = R2;
 % ncwriteatt('ix21_velocity.nc','vel','long_name','monthly cross-transect absolute geostrophic velocity')
 % ncwriteatt('ix21_velocity.nc','vel','units','m/s')
 % ncwriteatt('ix21_velocity.nc','vel','positive','northward')
-% ncwriteatt('ix21_velocity.nc','vel','comments','cross-transect geostrophic velocity referenced to Argo subsurface velocity at 1000-m')
+% ncwriteatt('ix21_velocity.nc','vel','comments','cross-transect geostrophic velocity referenced to Argo trajectory velocity at 1000-m')
 % 
 % %velocity cross-sections (LNM)
 % nccreate('ix21_velocity.nc','gvel_LNM','Dimensions',{'depth',length(argo_depth),'longitude',length(long_nom),'time',length(time_monthly)},'FillValue',NaN)
@@ -1333,7 +1333,7 @@ ann_cyc_sig{'Offshore','R2'} = R2;
 % ncwriteatt('ix21_velocity.nc','long_for_vel_err','standard_name','longitude')
 % ncwriteatt('ix21_velocity.nc','long_for_vel_err','long_name','longitude along nominal transect for velocity uncertainty term')
 % ncwriteatt('ix21_velocity.nc','long_for_vel_err','units','deg_E')
-% ncwriteatt('ix21_velocity.nc','long_for_vel_err','comments','longitude along the nominal transect at the mid point of each 1/2 degree longitude x 3 degree latitude bin used to compute Argo subsurface velocity at 1000-m')
+% ncwriteatt('ix21_velocity.nc','long_for_vel_err','comments','longitude along the nominal transect at the mid point of each 1/2 degree longitude x 3 degree latitude bin used to compute Argo trajectory velocity at 1000-m')
 % 
 % %latitude for Argo trajectory bins
 % nccreate('ix21_velocity.nc','lat_for_vel_err','Dimensions',{'long_for_vel_err',length(mid_long_bin)})
@@ -1341,7 +1341,7 @@ ann_cyc_sig{'Offshore','R2'} = R2;
 % ncwriteatt('ix21_velocity.nc','lat_for_vel_err','standard_name','latitude')
 % ncwriteatt('ix21_velocity.nc','lat_for_vel_err','long_name','latitude along nominal transect for velocity uncertainty term')
 % ncwriteatt('ix21_velocity.nc','lat_for_vel_err','units','deg_N')
-% ncwriteatt('ix21_velocity.nc','lat_for_vel_err','comments','latitude along the nominal transect at the mid point of each 1/2 degree longitude x 3 degree latitude bin used to compute Argo subsurface velocity at 1000-m')
+% ncwriteatt('ix21_velocity.nc','lat_for_vel_err','comments','latitude along the nominal transect at the mid point of each 1/2 degree longitude x 3 degree latitude bin used to compute Argo trajectory velocity at 1000-m')
 % 
 % %argo velocity standard error for each bin
 % nccreate('ix21_velocity.nc','vel_err','Dimensions',{'long_for_vel_err',length(mid_long_bin)}) 
@@ -1349,7 +1349,7 @@ ann_cyc_sig{'Offshore','R2'} = R2;
 % ncwriteatt('ix21_velocity.nc','vel_err','long_name','velocity uncertainty term')
 % ncwriteatt('ix21_velocity.nc','vel_err','units','m/s')
 % ncwriteatt('ix21_velocity.nc','vel_err','positive','northward')
-% ncwriteatt('ix21_velocity.nc','vel_err','comments','standard error of the Argo subsurface velocity component perpendicular to the nominal transect at 1000-m in each 1/2 degree longitude x 3 degree latitude bin')
+% ncwriteatt('ix21_velocity.nc','vel_err','comments','standard error of Argo trajectory velocity at 1000-m perpendicular to the nominal transect in each 1/2 degree longitude x 3 degree latitude bin')
 % 
 % 
 % %Global attributes:
@@ -1370,10 +1370,11 @@ ann_cyc_sig{'Offshore','R2'} = R2;
 % ncwriteatt('ix21_velocity.nc','/','creator_email','mlchandl@ucsd.edu');
 % ncwriteatt('ix21_velocity.nc','/','institution','Scripps Institution of Oceanography');
 % ncwriteatt('ix21_velocity.nc','/','version','1');
-% ncwriteatt('ix21_velocity.nc','/','history','version 1 created 15-Nov-2021');
+% ncwriteatt('ix21_velocity.nc','/','history','version 1 created 18-Nov-2021');
 % 
 % 
 % %Display netcdf:
 % ncdisp('ix21_velocity.nc')
+
 
 %% -- End -- 
