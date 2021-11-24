@@ -282,7 +282,7 @@ argo_prof_SH = DH/g;
 
 %Compute Argo profile correlation between SH and reference temperature
 ref_idx = find(argo_p_1975 == ref_depth); %find what depth idx is the reference depth level
-argo_prof_Tref = argo_prof_T_z(ref_idx,:); %argo profiles T at reference depth
+argo_prof_Tref = argo_prof_T_1975(ref_idx,:); %argo profiles T at reference depth
 argo_prof_SHref = argo_prof_SH - argo_prof_SH(ref_idx,:); %compute Argo profile SH relative to reference depth
 
 r_SH=NaN*argo_p_1975;
