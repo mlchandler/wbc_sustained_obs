@@ -1,5 +1,5 @@
 % Mitchell Chandler, SIO
-% Last updated: 02/11/2021
+% Last updated: 10/01/2021
 
 %Colours from Paul Tol (https://personal.sron.nl/~pault/) and Brewermap to ensure colourblind friendly palettes 
 
@@ -256,17 +256,16 @@ c.Ticks = [-0.2:0.025:0.2];
 c.TickLabels = {'-0.2','','','','-0.1','','','','0','','','','0.1','','','','0.2'};
 c.TickLength = cticklength;
 c.Label.String = 'SLA [m]';
-xlim([25 48])
-ylim([-35 -23])
-daspect([1 1 1])
+xlim([ix21_long_nom(idx_long(1)) ix21_long_nom(idx_long(end))]) 
+ylim([-32 -27])
 box on
 %axis ticks and labels:
 text(25.9,-24,'(e)','FontWeight','bold','FontSize',fsize,'Color','w')
-XX = [25:5:50];
+XX = [31:1:37];
 xticks(XX)
 XT = compose('%.0f\\circE',XX);
 xticklabels(XT)
-YY = [-35:5:-20];
+YY = [-33:1:-26];
 yticks(YY)
 YT = compose('%.0f\\circS',-YY);
 yticklabels(YT)
