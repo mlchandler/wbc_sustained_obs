@@ -8,6 +8,8 @@
 
 `Fig1.m`, `Fig1_panels.m`, `Fig2.m`, `Fig3.m`, `Fig4.m`, and `Fig5.m` are the scripts used to produce the figures in the submitted manuscript.
 
+`FigS1.m`, `FigS2.m`, and `FigS3.m` are the scripts used to produce the figures in the supporting information.
+
 The `additional_functions` folder includes my functions I have used in the above scripts. In particular the function `XAA_processing.m` contains the bulk of the methodology (correcting for individual transect path differences, extending observations in depth, and producing regular monthly time series). Other functions I have used include those from [TEOS-10](http://www.teos-10.org/) and [MATLAB File Exchange](https://www.mathworks.com/matlabcentral/fileexchange/) - please contact me for specifics.
 
 ### Contact:
