@@ -1,5 +1,5 @@
 % Mitchell Chandler, SIO
-% Last updated: 02/11/2021
+% Last updated: 09/03/2022
 
 %Colours from Paul Tol (https://personal.sron.nl/~pault/) and Brewermap to ensure colourblind friendly palettes 
 
@@ -109,14 +109,14 @@ hold on
 plot(smooth_time,px40_core_long_lowpass-mean(px40_core_long_lowpass),'Color',[0 153 136]/256,'LineWidth',3)
 set(gca,'YColor',[0 153 136]/256)
 ylim([-0.65 0.65])
-yline(0,'k')
+yline(0,'k','LineWidth',1.5)
 ylabel({'Deviations in','core longitude [\circE]'})
 yyaxis right
 hold on
 plot(smooth_time,KEI_interp,'Color',[238 119 51]/256,'LineWidth',3)
 set(gca,'YColor',[238 119 51]/256)
-yline(std(KEI_composite_interp)/2,'--') %std liines
-yline(-std(KEI_composite_interp)/2,'--')
+yline(std(KEI_composite_interp)/2,'--','LineWidth',1.5) %std liines
+yline(-std(KEI_composite_interp)/2,'--','LineWidth',1.5)
 ylim([-2.2 2.2])
 ylabel('KEI')
 yline(0,'k')
