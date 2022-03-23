@@ -1,5 +1,5 @@
 % Mitchell Chandler, SIO
-% Last updated: 18/11/2021
+% Last updated: 22/03/2022
 
 %% Load files
 load cmap_Zilberman %velocity colourmap
@@ -1211,7 +1211,7 @@ ann_cyc_sig = array2table(NaN(3,4),...
 
 %-wbc transport
 ann_cyc = detrend(wbc_transport_month(mm));
-filtered_ts = detrend(wbc_transport_filt3,'omitnan');
+filtered_ts = detrend(wbc_transport_filt3,'omitnan')';
 [r,p] = corr_pval(rmmissing(filtered_ts),ann_cyc(2:end-1));
 r2 = r^2;
 R2 = 1 - nansum((filtered_ts - ann_cyc).^2)/nansum((filtered_ts - nanmean(filtered_ts)).^2); %check that R2 is the same
@@ -1244,7 +1244,7 @@ ann_cyc_sig{'Offshore','R2'} = R2;
 
 %% Time-mean transport
 [mean_transport,transport_uncertainty,transport_stdev,transport_SE] =...
-    mean_error_transport(wbc_transport,vp_SE,mid_long_bin,long_nom,lat_nom,inshore_long(1),offshore_long_c_mean)
+    mean_error_transport(wbc_transport',vp_SE,mid_long_bin,long_nom,lat_nom,inshore_long(1),offshore_long_c_mean)
 
 %% -- Save variables --
 %% Save transect 
