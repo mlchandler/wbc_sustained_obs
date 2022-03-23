@@ -1273,8 +1273,8 @@ ann_cyc_sig{'Offshore','R2'} = R2;
 % ncwriteatt('px40_velocity.nc','/','creator_name','Mitchell Chandler');
 % ncwriteatt('px40_velocity.nc','/','creator_email','mlchandl@ucsd.edu');
 % ncwriteatt('px40_velocity.nc','/','institution','Scripps Institution of Oceanography');
-% ncwriteatt('px40_velocity.nc','/','version','1');
-% ncwriteatt('px40_velocity.nc','/','history','version 1 created 18-Nov-2021');
+% ncwriteatt('px40_velocity.nc','/','version','2');
+% ncwriteatt('px40_velocity.nc','/','history','version 1 created 18-Nov-2021; v2 created 22-Mar-2022');
 % 
 % 
 % %Display netcdf:
