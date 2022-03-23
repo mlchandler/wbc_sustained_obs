@@ -1,5 +1,5 @@
 % Mitchell Chandler, SIO
-% Last updated: 10/03/2022
+% Last updated: 22/03/2022
 
 load ix21_variability
 load px30_variability
@@ -84,11 +84,12 @@ plot(time_monthly,px40_wbc_transport_filt3,'Color',rgb('light blue'),'LineWidth'
 plot(time_monthly,px40_wbc_transport_trend,'r','LineWidth',2)
 % plot(time_monthly,px40_trend_upper_CI,'r:','LineWidth',1)
 % plot(time_monthly,px40_trend_lower_CI,'r:','LineWidth',1)
-fill([time_monthly;flipud(time_monthly)],[px40_trend_lower_CI;flipud(px40_trend_upper_CI)],'r','linestyle','none','facealpha',0.15)
+fill([time_monthly(1) time_monthly(end) time_monthly(end) time_monthly(1)],[px40_trend_lower_CI(1) px40_trend_lower_CI(end) px40_trend_upper_CI(end) px40_trend_upper_CI(1)],...
+    'r','linestyle','none','facealpha',0.15)
 %labels and axis
 datetick('x')
-ylim([10 100])
-yticks(10:15:100)
+ylim([20 100])
+yticks(20:20:100)
 ylabel('Transport [Sv]')
 text(datenum('01-Jan-2020'),107,'(c) Kuroshio','HorizontalAlignment','right','FontSize',fsize)
 box on
