@@ -1,5 +1,5 @@
 % Mitchell Chandler, SIO
-% Last updated: 10/01/2021
+% Last updated: 22/03/2022
 
 %Colours from Paul Tol (https://personal.sron.nl/~pault/) and Brewermap to ensure colourblind friendly palettes 
 
@@ -30,27 +30,6 @@ sla_S = squeeze(sla_monthly(I_long,I_lat-1,:));
 %re-reference SLA to be relative to 2004-2019 mean
 sla_N = sla_N - mean(sla_N);
 sla_S = sla_S - mean(sla_S);
-
-%% Compute geostrophic velocity
-g=9.81;
-f=gsw_f(lat_band);
-deta = sla_N - sla_S;
-dy = gsw_distance([long_band long_band],[lat_N lat_S]); %[m]
-uvel = -g/f*deta/dy;
-
-%% Correlate u' and IX21 core longitude
-[r,p,eDOF] = corr_pval(uvel,ix21_core_long);
-ix21_rpd = [r;p;eDOF]
-
-%% Other correlations
-% %Correlate u' and IX21 core depth-integrated velocity:
-% [r,p] = corr_pval(uvel,ix21_core_speed_raw')
-% 
-% %Correlate u' and IX21 WBC transport:
-% [r,p] = corr_pval(uvel,ix21_wbc_transport_raw)
-% 
-% %Correlate IX21 core longitude and core depth-integrated velocity:
-% [r,p] = corr_pval(ix21_core_long,ix21_core_speed_raw')
 
 %% Find 1 stdev of offshore deviations 
 %Rouault and Penven 2011; Krug and Tournadre 2012; Elipot and Beal 2015
@@ -85,7 +64,7 @@ gvel_diff = gvel_NP - gvel_normal;
 %determined to be significant if it falls within the bootstrapped CI, and
 %if the boostrapped CI does not cross 0.
 
-iterations = 1000; %1000 | 1E5
+iterations = 1E5;
 alpha = 0.05 %e.g. 0.1 = 90% CI, 0.05 = 95% CI
 
 store_diff = NaN(size(gvel_diff,1),size(gvel_diff,2),iterations); %[depth x long x iterations]
@@ -145,8 +124,8 @@ hold on
 set(gca,'Color','k') %background colour (and therefore NaNs)
 contourf(ix21_long_nom(idx_long),-argo_depth,gvel_NP,-mv:0.1:mv,'LineColor','none') 
 contour(ix21_long_nom(idx_long),-argo_depth,gvel_NP,[0 0],'LineColor',[0 0 0],'LineWidth',1.5) %0
-contour(ix21_long_nom(idx_long),-argo_depth,gvel_NP,-mv:0.1:-0.1,'--','LineColor',[0 0 0]+0.5,'LineWidth',1.5) %-ve
-contour(ix21_long_nom(idx_long),-argo_depth,gvel_NP,0.1:0.1:mv,'LineColor',[0 0 0]+0.5,'LineWidth',1.5) %+ve
+contour(ix21_long_nom(idx_long),-argo_depth,gvel_NP,-mv:0.1:-0.1,'--','LineColor',[0 0 0]+0.6,'LineWidth',1.5) %-ve
+contour(ix21_long_nom(idx_long),-argo_depth,gvel_NP,0.1:0.1:mv,'LineColor',[0 0 0]+0.6,'LineWidth',1.5) %+ve
 c = colorbar;
 caxis([-mv mv])
 c.Ticks = [-mv:0.1:mv];
@@ -175,8 +154,8 @@ hold on
 set(gca,'Color','k') %background colour (and therefore NaNs)
 contourf(ix21_long_nom(idx_long),-argo_depth,gvel_normal,-mv:0.1:mv,'LineColor','none') 
 contour(ix21_long_nom(idx_long),-argo_depth,gvel_normal,[0 0],'LineColor',[0 0 0],'LineWidth',1.5) %0
-contour(ix21_long_nom(idx_long),-argo_depth,gvel_normal,-mv:0.1:-0.1,'--','LineColor',[0 0 0]+0.5,'LineWidth',1.5) %-ve
-contour(ix21_long_nom(idx_long),-argo_depth,gvel_normal,0.1:0.1:mv,'LineColor',[0 0 0]+0.5,'LineWidth',1.5) %+ve
+contour(ix21_long_nom(idx_long),-argo_depth,gvel_normal,-mv:0.1:-0.1,'--','LineColor',[0 0 0]+0.6,'LineWidth',1.5) %-ve
+contour(ix21_long_nom(idx_long),-argo_depth,gvel_normal,0.1:0.1:mv,'LineColor',[0 0 0]+0.6,'LineWidth',1.5) %+ve
 c = colorbar;
 caxis([-mv mv])
 c.Ticks = [-mv:0.1:mv];
@@ -206,8 +185,8 @@ hold on
 set(gca,'Color','k') %background colour (and therefore NaNs)
 contourf(ix21_long_nom(idx_long),-argo_depth,gvel_diff,256,'LineColor','none') 
 contour(ix21_long_nom(idx_long),-argo_depth,gvel_diff,[0 0],'LineColor',[0 0 0],'LineWidth',1.5) %0 m/s
-contour(ix21_long_nom(idx_long),-argo_depth,gvel_diff,-mv:0.1:-0.1,'--','LineColor',[0 0 0]+0.5,'LineWidth',1.5) %-ve m/s
-contour(ix21_long_nom(idx_long),-argo_depth,gvel_diff,0.1:0.1:mv,'LineColor',[0 0 0]+0.5,'LineWidth',1.5) %+ve m/s
+contour(ix21_long_nom(idx_long),-argo_depth,gvel_diff,-mv:0.1:-0.1,'--','LineColor',[0 0 0]+0.6,'LineWidth',1.5) %-ve m/s
+contour(ix21_long_nom(idx_long),-argo_depth,gvel_diff,0.1:0.1:mv,'LineColor',[0 0 0]+0.6,'LineWidth',1.5) %+ve m/s
 colormap(gca,brewermap(256,'*BrBG'))
 c = colorbar;
 caxis([-mv mv])
@@ -244,8 +223,8 @@ set(gca,'color',0.6*[1 1 1])
 hold on
 contourf(long_sat_monthly,lat_sat_monthly,mean(sla_monthly0419(:,:,NP_idx),3)',[-0.2:0.025:0.2],'LineColor','none')
 contour(long_sat_monthly,lat_sat_monthly,mean(sla_monthly0419(:,:,NP_idx),3)',[0 0],'w','LineWidth',3) %0 m contour 
-contour(long_sat_monthly,lat_sat_monthly,mean(sla_monthly0419(:,:,NP_idx),3)',[0.1 0.1],'k--','LineWidth',2) %0.1 m contour
-contour(long_sat_monthly,lat_sat_monthly,mean(sla_monthly0419(:,:,NP_idx),3)',[-0.1 -0.1],'k','LineWidth',2) %-0.1 m contour
+contour(long_sat_monthly,lat_sat_monthly,mean(sla_monthly0419(:,:,NP_idx),3)',0.05:0.05:0.2,'k--','LineWidth',2) %+ve contours
+contour(long_sat_monthly,lat_sat_monthly,mean(sla_monthly0419(:,:,NP_idx),3)',-0.05:-0.05:-0.2,'k','LineWidth',2) %-ve contours
 plot(ix21_long_nom(idx_long),ix21_lat_nom(idx_long),'k','LineWidth',5) %region of IX21 transect shown in composites
 plot(ix21_long_nom,ix21_lat_nom,'k','LineWidth',1) %IX21 transect
 plot(ix21_mean_core_long,ix21_core_lat,'y.','MarkerSize',25) %mean location of Agulhas core
@@ -260,7 +239,7 @@ xlim([ix21_long_nom(idx_long(1)) ix21_long_nom(idx_long(end))])
 ylim([-32 -27])
 box on
 %axis ticks and labels:
-text(25.9,-24,'(e)','FontWeight','bold','FontSize',fsize,'Color','w')
+text(31.5,-27.4,'(e)','FontWeight','bold','FontSize',fsize,'Color','w')
 XX = [31:1:37];
 xticks(XX)
 XT = compose('%.0f\\circE',XX);
@@ -277,5 +256,6 @@ end
 for i=1:length(YY)
     yline(YY(i),':')
 end
+
 
 
