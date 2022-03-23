@@ -415,6 +415,16 @@ xbt_period_idx = find(time_sat >= datenum(dateshift(datetime(xbt_time(1),'Conver
 %compute SLA temporal anomaly
 sla_nom_a = sla_nom - mean(sla_nom(:,xbt_period_idx),2);
 
+%remove SLA trend over the HR-XBT transect time period
+sla_nom_a_orig = sla_nom_a;
+for i=1:length(long_nom)
+    %compute linear fit coefficients over HR-XBT period
+    sla_coef = polyfit(time_sat(xbt_period_idx),sla_nom_a(i,xbt_period_idx),1);
+    %apply linear fit coefficients over full 2004-2019 period
+    sla_trend = polyval(sla_coef,time_sat);
+    %subtract trend from SLA
+    sla_nom_a(i,:) = sla_nom_a_orig(i,:) - sla_trend';
+end
 
 %Read in xbt profile .dat files
 %specify XBT .dat files
@@ -512,6 +522,24 @@ end
 SH_nom_mean = nanmean(SH_nom,3);
 SH_nom_a = SH_nom - SH_nom_mean; %[depth x long x time]
 
+%remove SH trend from HR-XBT+Argo SH
+SH_nom_a_orig = SH_nom_a;
+%trend coefficients will be applied to 2004-2019 monthly time series to be added back in
+SH_nom_trend_coeff = NaN(length(argo_p_1975),length(long_nom),2); %[depth x long x coefficients]
+for i=1:length(long_nom)
+    for z=1:length(argo_p_1975)
+        %find NaNs
+        idx = ~isnan(squeeze(SH_nom_a_orig(z,i,:)));
+        %compute linear fit coefficients over HR-XBT period and save coefficients
+        p = polyfit(xbt_dates(idx),SH_nom_a_orig(z,i,idx),1);
+        SH_nom_trend_coeff(z,i,:) = p;  %[:,:,1 is the gradient; :,:,2 is the intercept]
+        %apply linear fit coefficients over HR-XBT period to compute trend
+        SH_trend_x = polyval(p,xbt_dates);
+        %remove trend from de-meaned SH
+        SH_nom_a(z,i,:) = squeeze(SH_nom_a_orig(z,i,:)) - SH_trend_x;
+    end
+end
+
 %vector of the surface values
 SHa_surf = squeeze(SH_nom_a(1,:,:));
 SHa_vec = SHa_surf(:);
@@ -548,27 +576,17 @@ for i=1:length(long_nom)
 end
 
 
-%Read in monthly SLA
-sla_monthly = ncread('sla_monthly_2004-2019_indo-pac.nc','sla'); %referenced to 1993-2012 period
-time_monthly = ncread('sla_monthly_2004-2019_indo-pac.nc','time');
-lat_sat_monthly = ncread('sla_monthly_2004-2019_indo-pac.nc','latitude');
-long_sat_monthly = ncread('sla_monthly_2004-2019_indo-pac.nc','longitude');
+%Monthly average daily SLA 
+%initialise
+time_monthly = datenum(2004,1:192,15);
+sla_nom_monthly_a = NaN(length(long_nom),length(time_monthly));
 
-%time is days since 1950-01-01
-time_monthly = double(time_monthly + datenum('01-Jan-1950'));
-
-%interpolate SLA to nominal transect
-sla_nom_monthly = NaN(length(long_nom),length(time_monthly));
-for i=1:length(time_monthly)
-    sla_nom_monthly(:,i) = interp2(lat_sat_monthly,long_sat_monthly,sla_monthly(:,:,i),lat_nom,long_nom);
+%monthly average daily data
+[y_monthly,m_monthly,~] = ymd(datetime(time_monthly,'ConvertFrom','datenum'));
+[y_daily,m_daily,~] = ymd(datetime(time_sat,'ConvertFrom','datenum'));
+for t=1:length(time_monthly)
+    sla_nom_monthly_a(:,t) = mean(sla_nom_a(:,(y_daily == y_monthly(t) & m_daily == m_monthly(t))),2);   
 end
-
-%find SLA temporal anomaly over the HR-XBT transect time period (e.g. 2004-2019)
-xbt_period_idx_monthly = find(time_monthly >= datenum(dateshift(datetime(xbt_time(1),'ConvertFrom','Datenum'),'start','year')) &...
-    time_monthly <= datenum(dateshift(datetime(xbt_time(end),'ConvertFrom','Datenum'),'end','year')));
-
-%compute SLA temporal anomaly
-sla_nom_monthly_a = sla_nom_monthly - mean(sla_nom_monthly(:,xbt_period_idx_monthly),2);
 
 
 %Apply regression model to monthly SLA'
@@ -579,8 +597,18 @@ for i=1:length(long_nom)
         SH_nom_monthly_a(z,i,:) = sla_nom_monthly_a(i,:)*sla_model(z,i,1) + sla_model(z,i,2);
     end
 end
-%Add mean SH back in
-SH_nom_monthly = SH_nom_monthly_a + SH_nom_mean;
+%Add HR-XBT+Argo SH trend back in
+SH_nom_monthly_a_wtrend = NaN*SH_nom_monthly_a; %initialise
+for i=1:length(long_nom)
+    for z=1:length(argo_p_1975)
+        %compute linear trend from linear fit coefficients
+        SH_trend = polyval(squeeze(SH_nom_trend_coeff(z,i,:)),time_monthly)';
+        %add trend to monthly SH anomaly 
+        SH_nom_monthly_a_wtrend(z,i,:) = squeeze(SH_nom_monthly_a(z,i,:)) + SH_trend;
+    end
+end
+%Add mean HR-XBT+Argo SH back in
+SH_nom_monthly = SH_nom_monthly_a_wtrend + SH_nom_mean;
 
 
 %Linear regression of monthly SH' at the surface and monthly SLA'
