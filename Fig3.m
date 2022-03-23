@@ -1,5 +1,5 @@
 % Mitchell Chandler, SIO
-% Last updated: 11/11/2021
+% Last updated: 23/03/2022
 
 %Have used colours from Paul Tol to ensure colourblind friendly palette https://personal.sron.nl/~pault/
 
@@ -17,13 +17,14 @@ subaxis(3,3,1,'SpacingVert',2.5E-2)
 hold on
 shaded_error(1:12,ix21_wbc_transport_month,ix21_wbc_transport_month_SE,[0 0 0],0.1,4)
 yline(mean(ix21_wbc_transport_raw),'--','LineWidth',2)
-ylabel({'WBC','transport [Sv]'},'FontWeight','bold')
+ylabel({'Western','boundary current','transport [Sv]'},'FontWeight','bold')
 xlim([1 12])
 xticks([1:12])
 xticklabels([])
 box on
 title(['Agulhas (',num2str(abs(ix21_core_lat)),'^\circS)'],'FontWeight','bold')
 set(gca,'FontSize',15)
+ylim([-51 -39])
 YL = ylim;
 ypos = max(YL) - range(YL)*0.1;
 text(1.25,ypos,'(a)','FontSize',15,'FontWeight','bold')
@@ -38,6 +39,7 @@ xticks([1:12])
 xticklabels([])
 box on
 set(gca,'FontSize',15)
+ylim([-350 -290])
 YL = ylim;
 ypos = max(YL) - range(YL)*0.1;
 text(1.25,ypos,'(d)','FontSize',15,'FontWeight','bold')
@@ -46,12 +48,13 @@ subaxis(3,3,7)
 hold on
 shaded_error(1:12,ix21_offshore_deviations_month,ix21_offshore_deviations_month_SE,[221 170 51]/256,0.2,4)
 yline(mean(ix21_offshore_dev_raw),'--','LineWidth',2)
-ylabel({'Deviations in','offshore edge [km]'},'FontWeight','bold')
+ylabel({'Offshore edge','deviations [km]'},'FontWeight','bold')
 xlim([1 12])
 xticks([1:12])
 xticklabels(['J';'F';'M';'A';'M';'J';'J';'A';'S';'O';'N';'D'])
 box on
 set(gca,'FontSize',15)
+ylim([-40 40])
 YL = ylim;
 ypos = max(YL) - range(YL)*0.1;
 text(1.25,ypos,'(g)','FontSize',15,'FontWeight','bold')
@@ -68,6 +71,7 @@ xticklabels([])
 box on
 title(['EAC (',num2str(abs(px30_core_lat)),'^\circS)'],'FontWeight','bold')
 set(gca,'FontSize',15)
+ylim([-26 -16])
 YL = ylim;
 ypos = max(YL) - range(YL)*0.1;
 text(1.25,ypos,'(b)','FontSize',15,'FontWeight','bold')
@@ -81,6 +85,7 @@ xticks([1:12])
 xticklabels([])
 box on
 set(gca,'FontSize',15)
+ylim([-280 -215])
 YL = ylim;
 ypos = max(YL) - range(YL)*0.1;
 text(1.25,ypos,'(e)','FontSize',15,'FontWeight','bold')
@@ -94,6 +99,7 @@ xticks([1:12])
 xticklabels(['J';'F';'M';'A';'M';'J';'J';'A';'S';'O';'N';'D'])
 box on
 set(gca,'FontSize',15)
+ylim([-30 30])
 YL = ylim;
 ypos = max(YL) - range(YL)*0.1;
 text(1.25,ypos,'(h)','FontSize',15,'FontWeight','bold')
@@ -110,6 +116,7 @@ xticklabels([])
 box on
 title(['Kuroshio (',num2str(abs(px40_core_lat)),'^\circN)'],'FontWeight','bold')
 set(gca,'FontSize',15)
+ylim([60 77])
 YL = ylim;
 ypos = max(YL) - range(YL)*0.1;
 text(1.25,ypos,'(c)','FontSize',15,'FontWeight','bold')
@@ -123,6 +130,7 @@ xticks([1:12])
 xticklabels([])
 box on
 set(gca,'FontSize',15)
+ylim([420 590])
 YL = ylim;
 ypos = max(YL) - range(YL)*0.1;
 text(1.25,ypos,'(f)','FontSize',15,'FontWeight','bold')
@@ -136,7 +144,9 @@ xticks([1:12])
 xticklabels(['J';'F';'M';'A';'M';'J';'J';'A';'S';'O';'N';'D'])
 box on
 set(gca,'FontSize',15)
+ylim([-30 30])
 YL = ylim;
 ypos = max(YL) - range(YL)*0.1;
 text(1.25,ypos,'(i)','FontSize',15,'FontWeight','bold')
+
 
