@@ -16,21 +16,6 @@ long_sat_monthly = ncread('sla_monthly_2004-2019_indo-pac.nc','longitude');
 %Find mean long position of Agulas core
 ix21_mean_core_long = mean(ix21_core_long);
 
-%Find SLA lat/long grid points nearest to Agulhas mean core lat/long
-[~,I_long] = min(abs(long_sat_monthly - ix21_mean_core_long));
-long_band = long_sat_monthly(I_long);
-[~,I_lat] = min(abs(lat_sat_monthly - ix21_core_lat));
-lat_band = lat_sat_monthly(I_lat);
-lat_N = lat_sat_monthly(I_lat+1);
-lat_S = lat_sat_monthly(I_lat-1);
-
-%Find SLA one grid point above (N) and below (S) the core for computing velocity 
-sla_N = squeeze(sla_monthly(I_long,I_lat+1,:));
-sla_S = squeeze(sla_monthly(I_long,I_lat-1,:));
-%re-reference SLA to be relative to 2004-2019 mean
-sla_N = sla_N - mean(sla_N);
-sla_S = sla_S - mean(sla_S);
-
 %% Find 1 stdev of offshore deviations 
 %Rouault and Penven 2011; Krug and Tournadre 2012; Elipot and Beal 2015
 offshore_std = mean(ix21_core_long)+std(ix21_core_long);
