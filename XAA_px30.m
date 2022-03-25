@@ -1,5 +1,5 @@
 % Mitchell Chandler, SIO
-% Last updated: 22/03/2022
+% Last updated: 25/03/2022
 
 %% Load files
 load cmap_Zilberman %velocity colourmap
@@ -1184,6 +1184,14 @@ ann_cyc_sig{'Offshore','R2'} = R2;
 % ncwriteatt('px30_velocity.nc','vel_err','positive','northward')
 % ncwriteatt('px30_velocity.nc','vel_err','comments','standard error of Argo trajectory velocity at 1000-m perpendicular to the nominal transect in each 1/2 degree longitude x 3 degree latitude bin')
 % 
+% %wbc transport
+% nccreate('px30_velocity.nc','wbc_transport','Dimensions',{'time',length(time_monthly)}) 
+% ncwrite('px30_velocity.nc','wbc_transport',wbc_transport)
+% ncwriteatt('px30_velocity.nc','wbc_transport','long_name','monthly cross-transect western boundary current volume transport')
+% ncwriteatt('px30_velocity.nc','wbc_transport','units','Sv [1 Sv = 1E6 m^3/s]')
+% ncwriteatt('px30_velocity.nc','wbc_transport','positive','northward')
+% ncwriteatt('px30_velocity.nc','wbc_transport','comments','cross-transect WBC transport for the East Australian Current computed using monthly cross-transect absolute geostrophic velocity')
+% 
 % 
 % %Global attributes:
 % ncwriteatt('px30_velocity.nc','/','title','px30_velocity.nc');
@@ -1203,7 +1211,7 @@ ann_cyc_sig{'Offshore','R2'} = R2;
 % ncwriteatt('px30_velocity.nc','/','creator_email','mlchandl@ucsd.edu');
 % ncwriteatt('px30_velocity.nc','/','institution','Scripps Institution of Oceanography');
 % ncwriteatt('px30_velocity.nc','/','version','2');
-% ncwriteatt('px30_velocity.nc','/','history','version 1 created 18-Nov-2021; v2 created 22-Mar-2022');
+% ncwriteatt('px30_velocity.nc','/','history','version 1 created 18-Nov-2021; v2 created 22-Mar-2022, updated 25-Mar-2022');
 % 
 % 
 % %Display netcdf:
