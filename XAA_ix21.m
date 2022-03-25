@@ -535,6 +535,12 @@ xlim([floor(mid_long_bin(1))-1 ceil(mid_long_bin(end))+1])
 xlabel('Longitude [\circE]')
 ylabel('Depth [dbar]')
 
+%% Save trajectory dates for combined figure
+% ix21_bin_long = mid_long_bin;
+% ix21_traj_time = binned_traj_time;
+% save('ix21_traj_dates.mat',...
+%     'ix21_bin_long','ix21_traj_time');
+
 %% Velocity vectors with bins overlain
 figure()
 hold on
