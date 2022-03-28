@@ -23,12 +23,15 @@ offshore_std = mean(ix21_core_long)+std(ix21_core_long);
 %Index when offshore deviations exceed this
 NP_idx = find(ix21_core_long >= offshore_std);
 
-%Manually check for consecutive months, if they exist then consider it to
-%be a single event
-find(diff(NP_idx)==1)
+%Manually check for consecutive NP dates, and for events close in time but
+%where the core longitude doesn't return toward normal conditions (trailing
+%meanders e.g. Elipot and Beal 2015) - if they exist consider them to be a
+%single event
+find(diff(NP_idx)==1 | diff(NP_idx)==2)
 % ix21_core_long(NP_idx([1 2 3])) %idx=2 is furtherest offshore so keep this point
-NP_idx([1 3]) = [];
-find(diff(NP_idx)==1)
+% ix21_core_long(NP_idx([6 7])) %idx=7 is a trailing meander
+% ix21_core_long(NP_idx([18 19])) %idx=19 is a trailing meander
+NP_idx([1 3 7 19]) = [];
 
 %Find number of Natal Pulse events
 num_NP = numel(NP_idx);
