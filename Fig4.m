@@ -1,5 +1,5 @@
 % Mitchell Chandler, SIO
-% Last updated: 22/03/2022
+% Last updated: 27/03/2022
 
 %Colours from Paul Tol (https://personal.sron.nl/~pault/) and Brewermap to ensure colourblind friendly palettes 
 
@@ -22,6 +22,13 @@ offshore_std = mean(ix21_core_long)+std(ix21_core_long);
 
 %Index when offshore deviations exceed this
 NP_idx = find(ix21_core_long >= offshore_std);
+
+%Manually check for consecutive months, if they exist then consider it to
+%be a single event
+find(diff(NP_idx)==1)
+% ix21_core_long(NP_idx([1 2 3])) %idx=2 is furtherest offshore so keep this point
+NP_idx([1 3]) = [];
+find(diff(NP_idx)==1)
 
 %Find number of Natal Pulse events
 num_NP = numel(NP_idx);
