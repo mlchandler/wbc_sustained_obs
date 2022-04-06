@@ -1,5 +1,5 @@
 % Mitchell Chandler, SIO
-% Last updated: 25/03/2022
+% Last updated: 06/04/2022
 
 %% Read in data
 A = readtable('KE_index_2020_07.csv');
@@ -36,9 +36,9 @@ ylabel('Kuroshio Extension Index')
 xlim([datetime('01-Jan-2004') datetime('01-Jan-2020')])
 box on
 set(gca,'FontSize',fsize)
-text(right_text,1.9,'stable dyanmic state','FontSize',fsize,'Color',[0 0 0]+0.5,...
+text(right_text,1.9,'stable dynamic state','FontSize',fsize,'Color',[0 0 0]+0.5,...
     'HorizontalAlignment','Right','VerticalAlignment','top')
-text(right_text,-1.9,'unstable dyanmic state','FontSize',fsize,'Color',[0 0 0]+0.5,...
+text(right_text,-1.9,'unstable dynamic state','FontSize',fsize,'Color',[0 0 0]+0.5,...
     'HorizontalAlignment','Right','VerticalAlignment','bottom')
 
 
