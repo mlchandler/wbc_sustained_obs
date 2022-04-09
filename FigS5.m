@@ -1,44 +1,100 @@
 % Mitchell Chandler, SIO
-% Last updated: 06/04/2022
+% Last updated: 30/03/2022
 
-%% Read in data
-A = readtable('KE_index_2020_07.csv');
-KEI_time = A{:,'Date'};
-KEI_date = datenum(KEI_time);
-KEI = A{:,'KEI'};
+load px40_velocity
+gvel_mean = nanmean(px40_gvel_LKM,3);
 
-load px40_fig2
+%% Find velocity trend
+vel_LKM_trend = NaN(length(argo_depth),length(px40_long_nom));
+vel_LKM_trend_sig = NaN(length(argo_depth),length(px40_long_nom));
+for x=1:length(px40_long_nom)
+    for z=1:length(argo_depth)
+        Y = squeeze(px40_gvel_LKM(z,x,:));
+        [p,Yhat,CI] = linear_trend(time_monthly,Y,1,0.05);
+        vel_LKM_trend(z,x) = p(1);
+        %only save trend if it is significant
+        if abs(p(1)) - abs(CI) > 0 %trend is significant
+            vel_LKM_trend_sig(z,x) = p(1);
+        elseif isnan(p(1)) %retain NaN values (bathymetry)
+            vel_LKM_trend_sig(z,x) = NaN;
+            vel_LKM_trend(z,x) = NaN;
+        else %trend is not significant
+            vel_LKM_trend_sig(z,x) = 0;
+        end
+    end
+end
 
-%% Smooth KEI using boxcar filter
-%boxcar filter gives the best visual match to smoothing applied by Qiu et al. 2020
-w_size = 53; %53 weeks
-W = (1/sum(boxcar(w_size)))*boxcar(w_size); 
-[KEI_lowpass] = conv_filt(KEI,W,w_size);
-
-%% Interpolate KEI to XAA times 
-%(monthly averaging gives results almost the same)
-KEI_composite_interp = interp1(KEI_date,KEI_lowpass,time_monthly);
+%convert trends from per day to per year
+vel_LKM_trend_sig = vel_LKM_trend_sig*365.25;
+vel_LKM_trend = vel_LKM_trend*365.25;
 
 %% Plot
-fsize = 13;
+fsize = 11;
 
-right_text = datetime('01-Aug-2019');
+xx = [px40_long_nom(1) 143];
+
+C1 = brewermap(256,'*PuOr');
+C1(123:134,:) = repmat([1 1 1],12,1);
+
+C2 = brewermap(256,'*RdBu');
+C2(123:134,:) = repmat([1 1 1],12,1);
+
 
 figure('color','w')
 clf
-hold on
-plot(KEI_time,KEI_lowpass,'k','LineWidth',3)
-yline(0,'k','LineWidth',1)
-yline(std(KEI_composite_interp)/2,'--','LineWidth',2)
-yline(-std(KEI_composite_interp)/2,'--','LineWidth',2)
-ylim([-2 2])
-ylabel('Kuroshio Extension Index')
-xlim([datetime('01-Jan-2004') datetime('01-Jan-2020')])
-box on
+
+%Mean velocity
+subplot(2,1,1)
+imagesc(px40_long_nom,argo_depth,gvel_mean)
+%colours:
+colormap(gca,C1)
+caxis([-1 1])
+c1 = colorbar;
+c1.Label.String = 'Velocity [m/s]';
+c1.FontSize = fsize;
+c1.Label.FontSize = fsize;
+%x-axis:
+xlim(xx)
+XX = [140:1:143];
+xticks(XX)
+XT = compose('%.0f\\circE',XX);
+xticklabels(XT)
+%y-axis:
+YY = [100:600:1900];
+yticks(YY)
+YT = compose('%.0f m',YY);
+yticklabels(YT)
+ylabel('Depth [m]')
+%formatting:
 set(gca,'FontSize',fsize)
-text(right_text,1.9,'stable dynamic state','FontSize',fsize,'Color',[0 0 0]+0.5,...
-    'HorizontalAlignment','Right','VerticalAlignment','top')
-text(right_text,-1.9,'unstable dynamic state','FontSize',fsize,'Color',[0 0 0]+0.5,...
-    'HorizontalAlignment','Right','VerticalAlignment','bottom')
+%text:
+text(142.75,1800,'(a)','FontSize',fsize,'FontWeight','bold')
+
+%Velocity trend
+subplot(2,1,2)
+imagesc(px40_long_nom,argo_depth,vel_LKM_trend_sig)
+%colours:
+colormap(gca,C2)
+caxis([-0.1 0.1])
+c2 = colorbar;
+c2.Label.String = 'Velocity trend [m/s/yr]';
+c2.FontSize = fsize;
+c2.Label.FontSize = fsize;
+%x-axis:
+xlim(xx)
+XX = [140:1:143];
+xticks(XX)
+XT = compose('%.0f\\circE',XX);
+xticklabels(XT)
+%y-axis:
+YY = [100:600:1900];
+yticks(YY)
+YT = compose('%.0f m',YY);
+yticklabels(YT)
+ylabel('Depth [m]')
+%formatting:
+set(gca,'FontSize',fsize)
+%text:
+text(142.75,1800,'(b)','FontSize',fsize,'FontWeight','bold')
 
 
