@@ -1,5 +1,5 @@
 % Mitchell Chandler, SIO
-% Last updated: 23/03/2022
+% Last updated: 13/04/2022
 
 %Have used colours from Paul Tol to ensure colourblind friendly palette https://personal.sron.nl/~pault/
 
@@ -116,7 +116,7 @@ xticklabels([])
 box on
 title(['Kuroshio (',num2str(abs(px40_core_lat)),'^\circN)'],'FontWeight','bold')
 set(gca,'FontSize',15)
-ylim([60 77])
+ylim([61 79])
 YL = ylim;
 ypos = max(YL) - range(YL)*0.1;
 text(1.25,ypos,'(c)','FontSize',15,'FontWeight','bold')
@@ -130,7 +130,7 @@ xticks([1:12])
 xticklabels([])
 box on
 set(gca,'FontSize',15)
-ylim([420 590])
+ylim([400 540])
 YL = ylim;
 ypos = max(YL) - range(YL)*0.1;
 text(1.25,ypos,'(f)','FontSize',15,'FontWeight','bold')
@@ -144,7 +144,7 @@ xticks([1:12])
 xticklabels(['J';'F';'M';'A';'M';'J';'J';'A';'S';'O';'N';'D'])
 box on
 set(gca,'FontSize',15)
-ylim([-30 30])
+ylim([-40 40])
 YL = ylim;
 ypos = max(YL) - range(YL)*0.1;
 text(1.25,ypos,'(i)','FontSize',15,'FontWeight','bold')
