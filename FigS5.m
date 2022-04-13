@@ -1,5 +1,5 @@
 % Mitchell Chandler, SIO
-% Last updated: 30/03/2022
+% Last updated: 12/04/2022
 
 load px40_velocity
 gvel_mean = nanmean(px40_gvel_LKM,3);
@@ -75,7 +75,7 @@ subplot(2,1,2)
 imagesc(px40_long_nom,argo_depth,vel_LKM_trend_sig)
 %colours:
 colormap(gca,C2)
-caxis([-0.1 0.1])
+caxis([-0.04 0.04])
 c2 = colorbar;
 c2.Label.String = 'Velocity trend [m/s/yr]';
 c2.FontSize = fsize;
