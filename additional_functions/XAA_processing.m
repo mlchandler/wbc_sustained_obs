@@ -1,5 +1,5 @@
 % Mitchell Chandler, SIO
-% Last updated: 09/10/2021
+% Last updated: 12/04/2022
 
 function [long_nom,lat_nom,argo_p_1975,time_monthly,gvel_nom] = XAA_processing(xbt_lat_nom,xbt_long_nom,xbt_coord,xbt_time,xbt_depth,T,S,sla_fname,trans_num,argo_fname,kink_long,ref_depth,xx,yy)
 %% Make sure variables are double format
@@ -597,17 +597,25 @@ for i=1:length(long_nom)
         SH_nom_monthly_a(z,i,:) = sla_nom_monthly_a(i,:)*sla_model(z,i,1) + sla_model(z,i,2);
     end
 end
+
+
 %Add HR-XBT+Argo SH trend back in
+%monthly time series index for range of years which have HR-XBT measurements  
+trend_idx = find(time_monthly >= datenum(dateshift(datetime(xbt_dates(1),'ConvertFrom','Datenum'),'start','year')) &...
+    time_monthly <= datenum(dateshift(datetime(xbt_dates(end),'ConvertFrom','Datenum'),'end','year')));
+%add HR-XBT+Argo SH trend back in
 SH_nom_monthly_a_wtrend = NaN*SH_nom_monthly_a; %initialise
 for i=1:length(long_nom)
     for z=1:length(argo_p_1975)
-        %compute linear trend from linear fit coefficients
-        SH_trend = polyval(squeeze(SH_nom_trend_coeff(z,i,:)),time_monthly)';
+        %set trend as 0 outside of HR-XBT sampling period
+        SH_trend = zeros(length(time_monthly),1);
+        %compute linear trend from linear fit coefficients only over HR-XBT period
+        SH_trend(trend_idx) = polyval(squeeze(SH_nom_trend_coeff(z,i,:)),time_monthly(trend_idx));
         %add trend to monthly SH anomaly 
         SH_nom_monthly_a_wtrend(z,i,:) = squeeze(SH_nom_monthly_a(z,i,:)) + SH_trend;
     end
 end
-%Add mean HR-XBT+Argo SH back in
+%Add mean SH back in
 SH_nom_monthly = SH_nom_monthly_a_wtrend + SH_nom_mean;
 
 
