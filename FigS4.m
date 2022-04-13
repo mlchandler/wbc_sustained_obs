@@ -1,5 +1,5 @@
 % Mitchell Chandler, SIO
-% Last updated: 31/03/2022
+% Last updated: 12/04/2022
 
 load ix21_variability
 load px30_variability
@@ -70,7 +70,7 @@ plot(time_monthly,px30_wbc_transport_filt3,'Color',rgb('light blue'),'LineWidth'
 datetick('x')
 yticks(-40:10:0)
 ylabel('Transport [Sv]')
-text(datenum('01-Jan-2020'),3,'(b) East Australian Current','HorizontalAlignment','right','FontSize',fsize)
+text(datenum('01-Jan-2020'),3.5,'(b) East Australian Current','HorizontalAlignment','right','FontSize',fsize)
 box on
 grid on
 set(gca,'FontSize',fsize)
@@ -88,10 +88,10 @@ fill([time_monthly(1) time_monthly(end) time_monthly(end) time_monthly(1)],[px40
     'r','linestyle','none','facealpha',0.15)
 %labels and axis
 datetick('x')
-ylim([20 100])
-yticks(20:20:100)
+ylim([20 110])
+yticks(20:30:110)
 ylabel('Transport [Sv]')
-text(datenum('01-Jan-2020'),107,'(c) Kuroshio','HorizontalAlignment','right','FontSize',fsize)
+text(datenum('01-Jan-2020'),118,'(c) Kuroshio','HorizontalAlignment','right','FontSize',fsize)
 box on
 grid on
 set(gca,'FontSize',fsize)
