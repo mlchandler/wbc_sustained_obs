@@ -1,5 +1,5 @@
 % Mitchell Chandler, SIO
-% Last updated: 25/03/2022
+% Last updated: 12/04/2022
 
 %% Load files
 load cmap_Zilberman %velocity colourmap
@@ -1288,7 +1288,7 @@ ann_cyc_sig{'Offshore','R2'} = R2;
 % ncwriteatt('px40_velocity.nc','/','creator_email','mlchandl@ucsd.edu');
 % ncwriteatt('px40_velocity.nc','/','institution','Scripps Institution of Oceanography');
 % ncwriteatt('px40_velocity.nc','/','version','2');
-% ncwriteatt('px40_velocity.nc','/','history','version 1 created 18-Nov-2021; v2 created 22-Mar-2022, updated 25-Mar-2022');
+% ncwriteatt('px40_velocity.nc','/','history','version 1 created 18-Nov-2021; v2 created 22-Mar-2022, updated 12-Apr-2022');
 % 
 % 
 % %Display netcdf:
