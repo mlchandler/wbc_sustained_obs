@@ -1,5 +1,5 @@
 % Mitchell Chandler, SIO
-% Last updated: 06/10/2021
+% Last updated: 12/04/2021
 
 % >> run each of these after running the script for that transect
 
@@ -42,11 +42,6 @@ YT = compose('%.0f\\circS',-YY);
 yticklabels(YT)
 set(gca,'TickDir','out','FontSize',12)
 
-% %proof of same scale between figures
-% quiver(60-5,-36+7,scale*0',scale*100','Color','k','LineWidth',3,'Autoscale','off','ShowArrowHead','off')
-% quiver(60-3,-36+7,scale*0',scale*200','Color','k','LineWidth',3,'Autoscale','off','ShowArrowHead','off')
-% quiver(60-1,-36+7,scale*0',scale*300','Color','k','LineWidth',3,'Autoscale','off','ShowArrowHead','off')
-
 %% PX30
 figure('color','w')
 % clf
@@ -87,11 +82,6 @@ YT = compose('%.0f\\circS',-YY);
 yticklabels(YT)
 set(gca,'TickDir','out','FontSize',12)
 
-% %proof of same scale between figures
-% quiver(180-5,-33+7,scale*0',scale*100','Color','k','LineWidth',3,'Autoscale','off','ShowArrowHead','off')
-% quiver(180-3,-33+7,scale*0',scale*200','Color','k','LineWidth',3,'Autoscale','off','ShowArrowHead','off')
-% quiver(180-1,-33+7,scale*0',scale*300','Color','k','LineWidth',3,'Autoscale','off','ShowArrowHead','off')
-
 %% PX40
 figure('color','w')
 clf
@@ -117,11 +107,11 @@ quiver(long_nom(pos),lat_nom(pos),scale*depth_int_u(pos),scale*depth_int_v(pos),
 neg = depth_int_v<0; 
 quiver(long_nom(neg),lat_nom(neg),scale*depth_int_u(neg),scale*depth_int_v(neg),'Color',[151 0 255]/255,'LineWidth',1,'Autoscale','off','ShowArrowHead','off')
 %Scale arrow
-quiver(159.5,37,scale*0',scale*200','Color','k','LineWidth',2,'Autoscale','off','ShowArrowHead','off')
-text(160,39.2,'200 m^2/s','Color','k','FontWeight','bold','FontSize',12)
+quiver(158.5,37,scale*0',scale*200','Color','k','LineWidth',2,'Autoscale','off','ShowArrowHead','off')
+text(159,39.2,'200 m^2/s','Color','k','FontWeight','bold','FontSize',12)
 
 xlim([135 165])
-ylim([27 42])
+ylim([28 43])
 daspect([1 1 1])
 
 %axis ticks and labels:
@@ -129,19 +119,14 @@ XX = [135:5:165];
 xticks(XX)
 XT = compose('%.0f\\circE',XX);
 xticklabels(XT)
-YY = [27:5:42];
+YY = [28:5:43];
 yticks(YY)
 YT = compose('%.0f\\circN',YY);
 yticklabels(YT)
 set(gca,'TickDir','out','FontSize',12)
 
 %label Izu Ridge
-t = text(137.6,27.5,'Izu Ridge','Color','k','FontSize',12); %'FontWeight','bold',
+t = text(137.6,28.5,'Izu Ridge','Color','k','FontSize',12);
 set(t,'Rotation',90);
-
-% %proof of same scale between figures
-% quiver(165-5,27+7,scale*0',scale*100','Color','k','LineWidth',3,'Autoscale','off','ShowArrowHead','off')
-% quiver(165-3,27+7,scale*0',scale*200','Color','k','LineWidth',3,'Autoscale','off','ShowArrowHead','off')
-% quiver(165-1,27+7,scale*0',scale*300','Color','k','LineWidth',3,'Autoscale','off','ShowArrowHead','off')
 
 
