@@ -1,5 +1,5 @@
 % Mitchell Chandler, SIO
-% Last updated: 27/03/2022
+% Last updated: 19/04/2022
 
 %Colours from Paul Tol (https://personal.sron.nl/~pault/) and Brewermap to ensure colourblind friendly palettes 
 
@@ -218,8 +218,8 @@ set(gca,'color',0.6*[1 1 1])
 hold on
 contourf(long_sat_monthly,lat_sat_monthly,mean(sla_monthly0419(:,:,NP_idx),3)',[-0.15:0.025:0.15],'LineColor','none')
 contour(long_sat_monthly,lat_sat_monthly,mean(sla_monthly0419(:,:,NP_idx),3)',[0 0],'w','LineWidth',3) %0 m contour 
-contour(long_sat_monthly,lat_sat_monthly,mean(sla_monthly0419(:,:,NP_idx),3)',0.05:0.05:0.2,'k--','LineWidth',2) %+ve contours
-contour(long_sat_monthly,lat_sat_monthly,mean(sla_monthly0419(:,:,NP_idx),3)',-0.05:-0.05:-0.2,'k','LineWidth',2) %-ve contours
+contour(long_sat_monthly,lat_sat_monthly,mean(sla_monthly0419(:,:,NP_idx),3)',0.05:0.05:0.2,'k','LineWidth',2) %+ve contours
+contour(long_sat_monthly,lat_sat_monthly,mean(sla_monthly0419(:,:,NP_idx),3)',-0.05:-0.05:-0.2,'k--','LineWidth',2) %-ve contours
 plot(ix21_long_nom(idx_long),ix21_lat_nom(idx_long),'k','LineWidth',5) %region of IX21 transect shown in composites
 plot(ix21_long_nom,ix21_lat_nom,'k','LineWidth',1) %IX21 transect
 plot(ix21_mean_core_long,ix21_core_lat,'y.','MarkerSize',25) %mean location of Agulhas core
