@@ -1,5 +1,5 @@
 % Mitchell Chandler, SIO
-% Last updated: 12/04/2022
+% Last updated: 13/06/2022
 
 %% Load files
 load cmap_Zilberman %velocity colourmap
@@ -1365,10 +1365,10 @@ ann_cyc_sig{'Offshore','R2'} = R2;
 % ncwriteatt('ix21_velocity.nc','wbc_transport','positive','northward')
 % ncwriteatt('ix21_velocity.nc','wbc_transport','comments','cross-transect WBC transport for the Agulhas Current computed using monthly cross-transect absolute geostrophic velocity')
 % 
-%
+% 
 % %Global attributes:
 % ncwriteatt('ix21_velocity.nc','/','title','ix21_velocity.nc');
-% ncwriteatt('ix21_velocity.nc','/','summary',"cross-sectional time series of absolute geostrophic velocity across HR-XBT line ix21 between Durban, South Africa and Mauritius from 0-m to 1975-m");
+% ncwriteatt('ix21_velocity.nc','/','summary',"cross-sectional time series of absolute geostrophic velocity across HR-XBT line ix21 between Durban, South Africa and Port Louis, Mauritius from 0-m to 1975-m");
 % ncwriteatt('ix21_velocity.nc','/','time_coverage_start','15-Jan-2004');
 % ncwriteatt('ix21_velocity.nc','/','time_coverage_end','15-Dec-2019');
 % ncwriteatt('ix21_velocity.nc','/','latitude_min',min(lat_nom));
@@ -1378,17 +1378,16 @@ ann_cyc_sig{'Offshore','R2'} = R2;
 % ncwriteatt('ix21_velocity.nc','/','longitude_res','0.1 deg');
 % ncwriteatt('ix21_velocity.nc','/','depth_min',min(argo_depth));
 % ncwriteatt('ix21_velocity.nc','/','depth_max',max(argo_depth));
-% ncwriteatt('ix21_velocity.nc','/','reference','[paper to be added upon acceptance]'); %<<add paper here
+% ncwriteatt('ix21_velocity.nc','/','reference','Chandler M, Zilberman NV, Sprintall J. (2022). Seasonal to decadal western boundary current variability from sustained ocean observations. Geophysical Research Letters.');
 % ncwriteatt('ix21_velocity.nc','/','date_created',datestr(now));
 % ncwriteatt('ix21_velocity.nc','/','creator_name','Mitchell Chandler');
 % ncwriteatt('ix21_velocity.nc','/','creator_email','mlchandl@ucsd.edu');
 % ncwriteatt('ix21_velocity.nc','/','institution','Scripps Institution of Oceanography');
 % ncwriteatt('ix21_velocity.nc','/','version','2');
-% ncwriteatt('ix21_velocity.nc','/','history','version 1 created 18-Nov-2021; v2 created 22-Mar-2022, updated 12-Apr-2022');
+% ncwriteatt('ix21_velocity.nc','/','history','version 1 created 18-Nov-2021; v2 created 22-Mar-2022, updated 12-Apr-2022, reference added 13-Jun-2022');
 % 
 % 
 % %Display netcdf:
 % ncdisp('ix21_velocity.nc')
-
 
 %% -- End -- 

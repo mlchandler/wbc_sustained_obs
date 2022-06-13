@@ -1,5 +1,5 @@
 % Mitchell Chandler, SIO
-% Last updated: 12/04/2022
+% Last updated: 13/06/2022
 
 %% Load files
 load cmap_Zilberman %velocity colourmap
@@ -1282,13 +1282,13 @@ ann_cyc_sig{'Offshore','R2'} = R2;
 % ncwriteatt('px40_velocity.nc','/','longitude_res','0.1 deg');
 % ncwriteatt('px40_velocity.nc','/','depth_min',min(argo_depth));
 % ncwriteatt('px40_velocity.nc','/','depth_max',max(argo_depth));
-% ncwriteatt('px40_velocity.nc','/','reference','[paper to be added upon acceptance]'); %<<add paper here
+% ncwriteatt('px40_velocity.nc','/','reference','Chandler M, Zilberman NV, Sprintall J. (2022). Seasonal to decadal western boundary current variability from sustained ocean observations. Geophysical Research Letters.');
 % ncwriteatt('px40_velocity.nc','/','date_created',datestr(now));
 % ncwriteatt('px40_velocity.nc','/','creator_name','Mitchell Chandler');
 % ncwriteatt('px40_velocity.nc','/','creator_email','mlchandl@ucsd.edu');
 % ncwriteatt('px40_velocity.nc','/','institution','Scripps Institution of Oceanography');
 % ncwriteatt('px40_velocity.nc','/','version','2');
-% ncwriteatt('px40_velocity.nc','/','history','version 1 created 18-Nov-2021; v2 created 22-Mar-2022, updated 12-Apr-2022');
+% ncwriteatt('px40_velocity.nc','/','history','version 1 created 18-Nov-2021; v2 created 22-Mar-2022, updated 12-Apr-2022, reference added 13-Jun-2022');
 % 
 % 
 % %Display netcdf:
