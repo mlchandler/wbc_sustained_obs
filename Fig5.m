@@ -1,5 +1,5 @@
 % Mitchell Chandler, SIO
-% Last updated: 23/03/2022
+% Last updated: 16/06/2022
 
 %Colours from Paul Tol (https://personal.sron.nl/~pault/) and Brewermap to ensure colourblind friendly palettes 
 
@@ -197,7 +197,7 @@ colormap(gca,brewermap(256,'*BrBG'))
 c = colorbar;
 caxis([-mv mv])
 c.Ticks = [-mv:0.1:mv];
-c.TickLabels = {'-0.7','','','','','','','0','','','','','','','0.7'}; %mv=0.7
+c.TickLabels = {'-0.5','','','','','0','','','','','0.5'}; %mv=0.5
 c.TickLength = cticklength;
 ylabel(c,'Velocity [m/s]')
 box off
